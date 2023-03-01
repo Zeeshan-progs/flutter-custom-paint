@@ -1,5 +1,4 @@
 import 'package:custom_paint/constants/colors.dart';
-import 'package:custom_paint/widget/light_app_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,23 +35,75 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-         TextPainter(),
-        ],
+      body: SafeArea(
+        child: ListView(
+          children: [
+            CustomPaint(
+              // need to define parent size to paint
+              size: MediaQuery.of(context).size,
+              painter: FlutterLogo(),
+            ),
+          ],
+        ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-class FlutterText extends CustomPainter {
+class FlutterLogo extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = AppColors.dark;
+// defile canvas stroke design
+
+    Paint paint = Paint()
+      ..strokeWidth = 2
+      ..color = AppColors.white;
+
     final height = size.height;
+
     final width = size.width;
-    canvas.drawLine(Offset.zero, Offset(height, height + 192), paint);
+
+    /// 1 single verticle line -------
+    canvas.drawLine(Offset(width * .1, height * 0.08),
+        Offset(width * .1, height * 0.46), paint);
+
+    /// 2. lets add some horizontal line to start move to make [F] latter
+    canvas.drawLine(Offset(width * .1, height * 0.46),
+        Offset(width * .2, height * 0.46), paint);
+
+    /// 3. now move our latter to little up
+    canvas.drawLine(Offset(width * .2, height * 0.46),
+        Offset(width * .2, height * 0.3), paint);
+
+    /// 4. now move our latter stroke to little horizontal
+    canvas.drawLine(Offset(width * .5, height * 0.3),
+        Offset(width * .2, height * 0.3), paint);
+
+    /// 4. now lets move our line to up little
+    canvas.drawLine(Offset(width * .4, height * 0.3),
+        Offset(width * .5, height * 0.25), paint);
+
+    /// 5. now lets move our line to little closer to start line
+    canvas.drawLine(Offset(width * .5, height * 0.25),
+        Offset(width * .2, height * 0.25), paint);
+
+    /// 6. now again move path to little up
+    canvas.drawLine(Offset(width * .2, height * 0.12),
+        Offset(width * .2, height * 0.25), paint);
+
+    /// 7. now make some horizontal move
+    canvas.drawLine(Offset(width * .2, height * 0.12),
+        Offset(width * .7, height * 0.12), paint);
+
+    /// 8.
+
+    canvas.drawLine(Offset(width * .6, height * 0.12),
+        Offset(width * .7, height * 0.08), paint);
+
+    /// 9. End of line
+
+    canvas.drawLine(Offset(width * .7, height * 0.08),
+        Offset(width * .1, height * 0.08), paint);
   }
 
   @override
